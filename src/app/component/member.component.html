@@ -1,0 +1,15 @@
+<!--<p-growl [value]="msgs"></p-growl>-->
+<p-dataTable [value]="members" [responsive]="true" [rows]="20"
+  selectionMode="single" [(selection)]="selectedMember" (onRowSelect)="onSelect($event)">
+  <p-column field="imageLink" header="头像">
+    <template let-col let-member="rowData" let-ri="rowIndex" pTemplate="body">
+      <img src="{{member[col.field]}}" class="rounded-circle" style="height: 30%">
+    </template>
+  </p-column>
+  <p-column field="name" header="姓名" [sortable]="true"></p-column>
+  <p-column field="team" header="队伍" [sortable]="true"></p-column>
+</p-dataTable>
+
+<p-paginator rows="{{rows}}" totalRecords="{{total}}" [rowsPerPageOptions]="[10,20,50]"
+  (onPageChange)="paginate($event)"></p-paginator>
+

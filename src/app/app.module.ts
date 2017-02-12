@@ -4,17 +4,47 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import {MembersComponent} from "./component/member.component";
+import {MemberService} from "./service/member.service";
+import {RouterModule} from "@angular/router";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {AppRoutingModule} from "./module/app-routing.module";
+import {PendingMemberComponent} from "./component/pendingmember.component";
+import {MemberDetailComponent} from "./component/member-detail.component";
+import {DataTableModule} from "primeng/components/datatable/datatable";
+import {SharedModule} from "primeng/components/common/shared";
+import {InputTextModule} from "primeng/components/inputtext/inputtext";
+import {DialogModule} from "primeng/components/dialog/dialog";
+import {ButtonModule} from "primeng/components/button/button";
+import 'rxjs/add/operator/toPromise';
+import {PaginatorModule} from "primeng/components/paginator/paginator";
+import {DataGridModule} from "primeng/components/datagrid/datagrid";
+import {PanelModule} from "primeng/components/panel/panel";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MembersComponent,
+    PendingMemberComponent,
+    MemberDetailComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+    DataTableModule,
+    DataGridModule,
+    PanelModule,
+    SharedModule,
+    InputTextModule,
+    ButtonModule,
+    DialogModule,
+    PaginatorModule,
+    NgbModule.forRoot()
   ],
-  providers: [],
+  exports: [RouterModule],
+  providers: [MemberService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

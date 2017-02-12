@@ -1,0 +1,48 @@
+<div class="ui-g" *ngIf="member">
+  <div class="ui-g-8">
+    <ul>
+      <li>姓名：{{member.name}}</li>
+      <li>昵称：{{member.nickName}}</li>
+      <li>身高：{{member.height}}</li>
+      <li>生日：{{formatDate(member.birthday) | date: 'yyyy-MM-dd'}}</li>
+      <li>血型：{{member.bloodType}}</li>
+      <li>所属队伍：{{member.team}}</li>
+      <li>期次：{{member.batch}}</li>
+      <li>加入时间：{{formatDate(member.joinTime) | date: 'yyyy-MM-dd'}}</li>
+      <li>爱好：{{member.hobby}}</li>
+      <li>备注：{{member.description}}</li>
+      <li>链接：<a [href]="member.link">{{member.link}}</a></li>
+    </ul>
+  </div>
+  <div class="ui-g-4">
+    <img [src]="member.imageLink" [alt]="member.name"/>
+  </div>
+</div>
+
+<!--<div *ngIf="member">
+  <ul>
+    <li>姓名：{{member.name}}</li>
+    <li>昵称：{{member.nickName}}</li>
+    <li>身高：{{member.height}}</li>
+    <li>生日：{{formatDate(member.birthday) | date: 'yyyy-MM-dd'}}</li>
+    <li>血型：{{member.bloodType}}</li>
+    <li>所属队伍：{{member.team}}</li>
+    <li>期次：{{member.batch}}</li>
+    <li>加入时间：{{formatDate(member.joinTime) | date: 'yyyy-MM-dd'}}</li>
+    <li>爱好：{{member.hobby}}</li>
+    <li>备注：{{member.description}}</li>
+    <li>链接：<a [href]="member.link">{{member.link}}</a></li>
+    <li>
+      <img [src]="member.imageLink" [alt]="member.name"/>
+    </li>
+  </ul>
+
+</div>-->
+
+<div *ngIf="memberWeiboData">
+  <ul>
+    <li>粉丝数：{{memberWeiboData.weiboFollowerCount}}</li>
+    <li>关注：{{memberWeiboData.weiboFriendsCount}}</li>
+    <li>微博数：{{memberWeiboData.weiboStatuesCount}}</li>
+  </ul>
+</div>
