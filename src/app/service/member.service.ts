@@ -9,11 +9,12 @@ import {Member} from "../model/member";
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {MemberWeiboData} from "../model/member-weibo-data";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class MemberService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private membersUrl = 'http://localhost:8081/girls/member'
+  private membersUrl = environment.serverHost + 'member'
 
   constructor(private http:Http) {
 

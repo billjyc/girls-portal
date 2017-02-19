@@ -3,13 +3,14 @@ import {Http} from "@angular/http";
 import {MemberPerformanceHistory} from "../model/member-performance";
 import {MemberCareer} from "../model/member-career";
 import {Performance} from "../model/performance";
+import {environment} from "../../environments/environment";
 /**
  * Created by billjyc on 2017/2/13.
  */
 
 @Injectable()
 export class PerformanceService {
-  private performanceUrl = 'http://localhost:8081/girls/performance';
+  private performanceUrl = environment.serverHost + 'performance';
 
   constructor(private http: Http) {}
 

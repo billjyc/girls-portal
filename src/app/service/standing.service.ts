@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import {MemberPerformanceAppearanceRank} from "../model/member-performance-appearance";
 import {MemberWeiboRank} from "../model/member-weibo-rank";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class StandingService {
 
-  private rankingUrl = 'http://localhost:8081/girls/rank';
+  private rankingUrl = environment.serverHost + 'rank';
   constructor(private http:Http) { }
 
   getMemberPerformanceAppearanceRank() {
