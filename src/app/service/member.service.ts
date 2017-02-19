@@ -31,6 +31,15 @@ export class MemberService {
       .catch(this.handleError);
   }
 
+  getMembersByTeamId(teamId: number) {
+    const url = `${this.membersUrl}/team/${teamId}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => <Member[]> res.json())
+      .then(data => {return data;})
+      .catch(this.handleError);
+  }
+
   getPendingMembers() {
     const url = `${this.membersUrl}/list/pending`;
     return this.http.get(url)
@@ -51,6 +60,17 @@ export class MemberService {
     const url = `${this.membersUrl}/weibo/${id}`;
     return this.http.get(url)
       .map(res => res.json() as MemberWeiboData)
+      .catch(this.handleError);
+  }
+
+  getWeiboHistory(id: number, days: number = 7) {
+    const url = `${this.membersUrl}/weibo/${id}/history`;
+    let params = new URLSearchParams();
+    params.set("days", days.toString());
+    return this.http.get(url, {search: params})
+      .toPromise()
+      .then(data => <MemberWeiboData[]> data.json())
+      .then(data => {return data})
       .catch(this.handleError);
   }
 

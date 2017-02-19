@@ -2,12 +2,11 @@
  * Created by billjyc on 2017/2/5.
  */
 
-export class MemberWeiboData {
-  constructor(
-    public memberId: number,
-    public weiboId: number,
-    public weiboFollowerCount: number,
-    public weiboFriendsCount: number,
-    public weiboStatuesCount: number
-  ) {}
+export interface MemberWeiboData {
+   memberId: number;
+   weiboId: number;
+   weiboFollowerCount: number;
+   weiboFriendsCount: number;
+   weiboStatusesCount: number;
+   updateTime: number;
 }

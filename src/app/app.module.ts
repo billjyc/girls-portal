@@ -20,6 +20,15 @@ import 'rxjs/add/operator/toPromise';
 import {PaginatorModule} from "primeng/components/paginator/paginator";
 import {DataGridModule} from "primeng/components/datagrid/datagrid";
 import {PanelModule} from "primeng/components/panel/panel";
+import {TabViewModule} from "primeng/components/tabview/tabview";
+import {PerformanceService} from "./service/performance.service";
+import {PerformanceComponent} from "./component/performance/performance.component";
+import {CarouselModule} from "primeng/components/carousel/carousel";
+import {DataListModule} from "primeng/components/datalist/datalist";
+import {ChartModule} from "primeng/components/chart/chart";
+import {DropdownModule} from "primeng/components/dropdown/dropdown";
+import {StandingService} from "./service/standing.service";
+import {StandingComponent} from "./component/standing/standing.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +36,8 @@ import {PanelModule} from "primeng/components/panel/panel";
     MembersComponent,
     PendingMemberComponent,
     MemberDetailComponent,
+    PerformanceComponent,
+    StandingComponent
   ],
   imports: [
     BrowserModule,
@@ -35,16 +46,21 @@ import {PanelModule} from "primeng/components/panel/panel";
     AppRoutingModule,
     DataTableModule,
     DataGridModule,
+    DataListModule,
+    DropdownModule,
+    ChartModule,
     PanelModule,
     SharedModule,
     InputTextModule,
     ButtonModule,
     DialogModule,
     PaginatorModule,
+    TabViewModule,
+    CarouselModule,
     NgbModule.forRoot()
   ],
   exports: [RouterModule],
-  providers: [MemberService],
+  providers: [MemberService, PerformanceService, StandingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

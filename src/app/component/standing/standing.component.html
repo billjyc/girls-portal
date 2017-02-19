@@ -1,0 +1,81 @@
+<div class="ui-g-5">
+  <p-dataList [value]="memberPerformanceAppearanceRanks" [paginator]="true" [rows]="5">
+    <p-header>
+      <p style="font-size: 18px; font-family: Microsoft YaHei UI, Arial; margin-bottom: 0">公演场次排名</p>
+    </p-header>
+    <template let-performanceRank pTemplate="item">
+      <div class="ui-grid ui-grid-responsive ui-fluid"
+           style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1 rank" style="text-align: center">
+            {{performanceRank.rank}}
+          </div>
+          <div class="ui-grid-col-3" style="text-align: center;">
+            <a href="{{'/detail/' + performanceRank.memberId}}" target="_blank">
+              <img [src]="performanceRank.imageLink" style="width: 40%; cursor: pointer;"/>
+            </a>
+          </div>
+          <div class="ui-grid-col-6" >
+            <div class="ui-grid-row name" style="text-align: center;">
+              <a href="{{'/detail/' + performanceRank.memberId}}" target="_blank">
+                {{performanceRank.name}}
+              </a>
+            </div>
+            <div class="ui-grid-row team" style="text-align: center;">
+              {{formatTeam(performanceRank.team)}}
+            </div>
+            <div class="ui-grid-row batch" style="text-align: center;">
+              {{performanceRank.batch}}
+            </div>
+          </div>
+          <div class="ui-grid-col-2">
+            <div class="ui-grid-row">
+              {{performanceRank.appearances}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </p-dataList>
+</div>
+<div class="ui-g-2"></div>
+<div class="ui-g-5">
+  <p-dataList [value]="memberWeiboRanks" [paginator]="true" [rows]="5">
+    <p-header>
+      <p style="font-size: 18px; font-family: Microsoft YaHei UI, Arial; margin-bottom: 0">微博粉丝排名</p>
+    </p-header>
+    <template let-weiboRank pTemplate="item">
+      <div class="ui-grid ui-grid-responsive ui-fluid"
+           style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-1 rank" style="text-align: center">
+            {{weiboRank.rank}}
+          </div>
+          <div class="ui-grid-col-3" style="text-align: center;">
+            <a href="{{'/detail/' + weiboRank.memberId}}" target="_blank">
+              <img [src]="weiboRank.imageLink" style="width: 40%; cursor: pointer;"/>
+            </a>
+          </div>
+          <div class="ui-grid-col-6" >
+            <div class="ui-grid-row name" style="text-align: center;">
+              <a href="{{'/detail/' + weiboRank.memberId}}" target="_blank">
+                {{weiboRank.name}}
+              </a>
+            </div>
+            <div class="ui-grid-row team" style="text-align: center;">
+              {{formatTeam(weiboRank.team)}}
+            </div>
+            <div class="ui-grid-row batch" style="text-align: center;">
+              {{weiboRank.batch}}
+            </div>
+          </div>
+          <div class="ui-grid-col-2">
+            <div class="ui-grid-row">
+              {{weiboRank.followersCount}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </p-dataList>
+</div>

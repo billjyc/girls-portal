@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.whiteText a {
+  color: white;
+}
+
+#memberTab .ui-tabview-nav li a {
+  color: white;
+  font-family: "Microsoft YaHei UI", Arial;
+}
+
+#memberTab .ui-tabview-nav li.ui-tabview-selected a {
+  font-size: 110%;
+}

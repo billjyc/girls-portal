@@ -8,23 +8,30 @@ import {MemberService} from "../service/member.service";
 import {Router} from "@angular/router";
 import {Member} from "../model/member";
 import 'rxjs/Rx';
-import {Message} from "primeng/components/common/api";
+import {MemberUtil} from "../utils/MemberUtil";
+import {Title} from "@angular/platform-browser";
+import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Component({
   selector: 'member-list',
   moduleId: module.id,
   templateUrl: 'member.component.html',
+  styleUrls: ['member.component.css']
 })
 
 export class MembersComponent implements OnInit {
   ngOnInit(): void {
     this.rows = 20;
     this.page = 1;
-    this.memberService.getAllActiveMembers(this.page, this.rows)
-      .then(data => {
-        this.members = <Member[]> data.rows;
-        this.total = data.total;
-      });
+
+    //console.log(MembersComponent.team);
+    let teamIdCookie = Cookie.get('teamId');
+    if(!teamIdCookie) {
+      this.team = 1;
+    } else {
+      this.team = +teamIdCookie;
+    }
+    this.getMembersByTeamId(this.team);
   }
 
   members: Member[];
@@ -32,16 +39,36 @@ export class MembersComponent implements OnInit {
   page: number;
   rows: number;
   total: number;
-
-  msgs: Message[] = [];
+  team: number = 1;
 
   constructor(private memberService: MemberService,
-              private router: Router) {
+              private router: Router,
+              private titleService: Title) {
+    this.titleService.setTitle('成员');
+  }
 
+  shouldSelected(id: number) {
+    return this.team == id;
   }
 
   paginate(event:any) {
     this.getMembers2(event.page + 1, event.rows);
+  }
+
+  handleTabChange(e) {
+    let index = e.index;
+    this.team = index + 1;
+    Cookie.set('teamId', this.team.toString());
+    this.getMembersByTeamId(index + 1);
+  }
+
+  getMembersByTeamId(id: number) {
+    this.memberService.getMembersByTeamId(id)
+      .then(data => {this.members = data;});
+  }
+
+  formatTeam(teamId: number): string {
+    return MemberUtil.formatTeam(teamId);
   }
 
   getMembers2(page: number, rows: number) {
@@ -58,7 +85,8 @@ export class MembersComponent implements OnInit {
     this.router.navigate(['/detail', this.selectedMember.id]);
   }
 
-  onSelect(event): void {
+  onSelect(selectedMember : Member): void {
+    this.selectedMember = selectedMember;
     this.goToDetail();
   }
 }
