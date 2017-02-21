@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {MemberPerformanceAppearanceRank} from "../model/member-performance-appearance";
 import {MemberWeiboRank} from "../model/member-weibo-rank";
 import {environment} from "../../environments/environment";
+import {PerformanceAppRateRank} from "../model/performance-apprate-rank";
 
 @Injectable()
 export class StandingService {
@@ -24,6 +25,15 @@ export class StandingService {
     return this.http.get(url)
       .toPromise()
       .then(data => <MemberWeiboRank[]> data.json())
+      .then(data => {return data;})
+      .catch(this.handleError);
+  }
+
+  getPerformanceAppsRateRank() {
+    const url = `${this.rankingUrl}/performance/appearanceRate`;
+    return this.http.get(url)
+      .toPromise()
+      .then(data => <PerformanceAppRateRank[]> data.json())
       .then(data => {return data;})
       .catch(this.handleError);
   }

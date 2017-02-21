@@ -5,6 +5,7 @@ import {Title} from "@angular/platform-browser";
 import {MemberUtil} from "../../utils/MemberUtil";
 import {Router} from "@angular/router";
 import {MemberWeiboRank} from "../../model/member-weibo-rank";
+import {PerformanceAppRateRank} from "../../model/performance-apprate-rank";
 
 @Component({
   selector: 'app-standing',
@@ -22,6 +23,7 @@ export class StandingComponent implements OnInit {
   ngOnInit() {
     this.getPerformanceRank();
     this.getMemberWeiboRank();
+    this.getPerformanceAppRateRank();
   }
 
   formatTeam(teamId: number) {
@@ -38,7 +40,12 @@ export class StandingComponent implements OnInit {
       .then(data => {this.memberWeiboRanks = data});
   }
 
+  getPerformanceAppRateRank() {
+    this.rankService.getPerformanceAppsRateRank()
+      .then(data => {this.performanceAppRateRank = data});
+  }
+
   memberWeiboRanks: MemberWeiboRank[];
   memberPerformanceAppearanceRanks: MemberPerformanceAppearanceRank[];
-
+  performanceAppRateRank: PerformanceAppRateRank[];
 }
