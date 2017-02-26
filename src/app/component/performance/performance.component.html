@@ -29,3 +29,23 @@
     </div>
   </template>
 </p-dataGrid>
+
+<div class="ui-g">
+  <p-dataTable [value]="incomingPerformances" [paginator]="true" [rows]="10"
+               [style]="{'text-align':'center'}">
+    <p-header>公演日程</p-header>
+    <p-column header="公演日期">
+      <template let-col let-perf="rowData" pTemplate="body">
+        {{perf.date | date: 'yyyy-MM-dd HH:mm'}}
+      </template>
+    </p-column>
+    <p-column field="name" header="公演名称"></p-column>
+    <p-column header="队伍">
+      <template let-col let-perf="rowData" pTemplate="body">
+        {{formatTeam(perf.team)}}
+      </template>
+    </p-column>
+    <p-column field="description" header="备注"></p-column>
+  </p-dataTable>
+</div>
+

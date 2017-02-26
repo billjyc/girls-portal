@@ -6,6 +6,7 @@ import {MemberUtil} from "../../utils/MemberUtil";
 import {Router} from "@angular/router";
 import {MemberWeiboRank} from "../../model/member-weibo-rank";
 import {PerformanceAppRateRank} from "../../model/performance-apprate-rank";
+import {Cookie} from "ng2-cookies/ng2-cookies";
 
 @Component({
   selector: 'app-standing',
@@ -17,6 +18,7 @@ export class StandingComponent implements OnInit {
   constructor(private rankService: StandingService,
               private titleService: Title,
               private router: Router,) {
+    Cookie.delete('teamId');
     this.titleService.setTitle('排行');
   }
 
