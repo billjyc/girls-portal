@@ -13,6 +13,9 @@ export class MemberUtil {
   }
 
   static formatTeam(teamId: number): string{
+    if(teamId == null) {
+      return '';
+    }
     return 'SNH48 Team ' + Team[teamId];
   }
 }

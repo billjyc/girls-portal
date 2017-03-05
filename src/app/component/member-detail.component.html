@@ -9,19 +9,36 @@
   </div>
   <div class="ui-g-8" style="padding: 5px">
     <p-panel header="成员信息">
-        <div>昵称：{{member.nickName}}</div>
-        <div>身高：{{member.height}}</div>
-        <div>生日：{{formatDate(member.birthday) | date: 'yyyy-MM-dd'}}</div>
-        <div>血型：{{member.bloodType}}</div>
+      <div class="ui-grid-row">
+        <div class="ui-g-6">
+          <div>昵称：{{member.nickName}}</div>
+          <div>身高：{{member.height}}</div>
+          <div>生日：{{formatDate(member.birthday) | date: 'yyyy-MM-dd'}}</div>
+          <div>血型：{{member.bloodType}}</div>
+          <div>星座：{{member.constellation}}</div>
+          <div>出生地：{{member.birthPlace}}</div>
+        </div>
+        <div class="ui-g-6">
+          <div>个人特长：{{member.speciality}}</div>
+          <div>兴趣爱好：{{member.hobby}}</div>
+          <div>加入时间：{{formatDate(member.joinTime) | date: 'yyyy-MM-dd'}}</div>
+          <div>加入所属：{{member.batch}}</div>
+          <div>最终所属：{{formatTeam(member.team)}}</div>
+          <div>所属公司：{{member.agency}}</div>
+        </div>
+      </div>
 
-        <div>加入时间：{{formatDate(member.joinTime) | date: 'yyyy-MM-dd'}}</div>
-        <div>爱好：{{member.hobby}}</div>
-        <div>链接：<a [href]="member.link" target="_blank">{{member.link}}</a></div>
-        <div>备注：
-          <div *ngFor="let desc of formatDesc(member.description)">
-            {{desc}}
+      <div class="ui-grid-row">
+        <div class="ui-g-12">
+          <div>链接：<a [href]="member.link" target="_blank">{{member.link}}</a></div>
+          <div>经历备注：
+            <div *ngFor="let desc of formatDesc(member.description)">
+              {{desc}}
+            </div>
           </div>
         </div>
+      </div>
+
     </p-panel>
   </div>
 </div>

@@ -6,7 +6,7 @@ export interface IncomingPerformance {
   performanceHistoryId: number;
   performanceId: number;
   name: string;
-  team: number;
+  team?: number;
   date: number;
   description?: string;
 }

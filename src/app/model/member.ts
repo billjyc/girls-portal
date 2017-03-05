@@ -17,6 +17,11 @@ export interface Member {
   hobby?: string;
   description?: string;
   isValid?: number;
+  birthPlace?: string;
+  constellation?: string;
+  englishName?: string;
+  agency?: string;
+  speciality?: string;
 }
 
 /*export class Member {
