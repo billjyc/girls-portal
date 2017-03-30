@@ -3,13 +3,13 @@
  */
 
 
-import {Component, OnInit} from "@angular/core";
-import {MemberService} from "../service/member.service";
-import {Router} from "@angular/router";
-import {Member} from "../model/member";
+import {Component, OnInit} from '@angular/core';
+import {MemberService} from '../service/member.service';
+import {Router} from '@angular/router';
+import {Member} from '../model/member';
 import 'rxjs/Rx';
-import {MemberUtil} from "../utils/MemberUtil";
-import {Title} from "@angular/platform-browser";
+import {MemberUtil} from '../utils/MemberUtil';
+import {Title} from '@angular/platform-browser';
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Component({
@@ -20,26 +20,26 @@ import {Cookie} from 'ng2-cookies/ng2-cookies';
 })
 
 export class MembersComponent implements OnInit {
+  members: Member[];
+  selectedMember: Member;
+  page: number;
+  rows: number;
+  total: number;
+  team = 1;
+
   ngOnInit(): void {
     this.rows = 20;
     this.page = 1;
 
-    //console.log(MembersComponent.team);
-    let teamIdCookie = Cookie.get('teamId');
-    if(!teamIdCookie) {
+    // console.log(MembersComponent.team);
+    const teamIdCookie = Cookie.get('teamId');
+    if (!teamIdCookie) {
       this.team = 1;
     } else {
       this.team = +teamIdCookie;
     }
     this.getMembersByTeamId(this.team);
   }
-
-  members: Member[];
-  selectedMember: Member;
-  page: number;
-  rows: number;
-  total: number;
-  team: number = 1;
 
   constructor(private memberService: MemberService,
               private router: Router,
@@ -48,15 +48,15 @@ export class MembersComponent implements OnInit {
   }
 
   shouldSelected(id: number) {
-    return this.team == id;
+    return this.team === id;
   }
 
-  paginate(event:any) {
+  paginate(event: any) {
     this.getMembers2(event.page + 1, event.rows);
   }
 
   handleTabChange(e) {
-    let index = e.index;
+    const index = e.index;
     this.team = index + 1;
     Cookie.set('teamId', this.team.toString());
     this.getMembersByTeamId(index + 1);
@@ -64,7 +64,7 @@ export class MembersComponent implements OnInit {
 
   getMembersByTeamId(id: number) {
     this.memberService.getMembersByTeamId(id)
-      .then(data => {this.members = data;});
+      .then(data => {this.members = data; });
   }
 
   formatTeam(teamId: number): string {
@@ -85,7 +85,7 @@ export class MembersComponent implements OnInit {
     this.router.navigate(['/detail', this.selectedMember.id]);
   }
 
-  onSelect(selectedMember : Member): void {
+  onSelect(selectedMember: Member): void {
     this.selectedMember = selectedMember;
     this.goToDetail();
   }

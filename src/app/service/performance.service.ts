@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {MemberPerformanceHistory} from "../model/member-performance";
-import {MemberCareer} from "../model/member-career";
-import {Performance} from "../model/performance";
-import {environment} from "../../environments/environment";
-import {IncomingPerformance} from "../model/incoming-performace";
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {MemberPerformanceHistory} from '../model/member-performance';
+import {MemberCareer} from '../model/member-career';
+import {Performance} from '../model/performance';
+import {environment} from '../../environments/environment';
+import {IncomingPerformance} from '../model/incoming-performace';
 /**
  * Created by billjyc on 2017/2/13.
  */
@@ -20,8 +20,8 @@ export class PerformanceService {
     return this.http.get(url)
       .toPromise()
       .then(data => <MemberPerformanceHistory[]> data.json())
-      .then(data => {return data;})
-      .catch(this.handleError)
+      .then(data => {return data; })
+      .catch(this.handleError);
   }
 
   getMemberCareerHistory(memberId: number) {
@@ -29,7 +29,7 @@ export class PerformanceService {
     return this.http.get(url)
       .toPromise()
       .then(data => <MemberCareer[]> data.json())
-      .then(data => {return data;})
+      .then(data => {return data; })
       .catch(this.handleError);
   }
 
@@ -38,7 +38,7 @@ export class PerformanceService {
     return this.http.get(url)
       .toPromise()
       .then(data => <Performance[]> data.json())
-      .then(data => {return data;})
+      .then(data => {return data; })
       .catch(this.handleError);
   }
 
@@ -47,7 +47,7 @@ export class PerformanceService {
     return this.http.get(url)
       .toPromise()
       .then(data => <IncomingPerformance[]> data.json())
-      .then(data => {return data;})
+      .then(data => {return data; })
       .catch(this.handleError);
   }
 

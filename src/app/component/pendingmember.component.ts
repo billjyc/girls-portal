@@ -2,10 +2,10 @@
  * Created by billjyc on 2017/2/1.
  */
 
-import {Component, OnInit} from "@angular/core";
-import {MemberService} from "../service/member.service";
-import {Member} from "../model/member";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {MemberService} from '../service/member.service';
+import {Member} from '../model/member';
+import {Router} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
 
 export class PendingMemberComponent implements OnInit {
   pendingMembers: Member[];
-  selectedMember: Member
+  selectedMember: Member;
 
   ngOnInit(): void {
     this.memberService.getPendingMembers().then(

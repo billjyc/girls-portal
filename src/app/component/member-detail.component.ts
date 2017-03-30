@@ -1,18 +1,18 @@
 /**
  * Created by billjyc on 2017/2/1.
  */
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {Member} from "../model/member";
-import {MemberService} from "../service/member.service";
-import {ActivatedRoute, Params} from "@angular/router";
-import {MemberWeiboData} from "../model/member-weibo-data";
-import {MemberUtil} from "../utils/MemberUtil";
-import {MemberPerformanceHistory} from "../model/member-performance";
-import {PerformanceService} from "../service/performance.service";
-import {MemberCareer} from "../model/member-career";
-import {Title} from "@angular/platform-browser";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Member} from '../model/member';
+import {MemberService} from '../service/member.service';
+import {ActivatedRoute, Params} from '@angular/router';
+import {MemberWeiboData} from '../model/member-weibo-data';
+import {MemberUtil} from '../utils/MemberUtil';
+import {MemberPerformanceHistory} from '../model/member-performance';
+import {PerformanceService} from '../service/performance.service';
+import {MemberCareer} from '../model/member-career';
+import {Title} from '@angular/platform-browser';
 import {SelectItem} from 'primeng/primeng';
-import {UIChart} from "primeng/components/chart/chart";
+import {UIChart} from 'primeng/components/chart/chart';
 
 @Component({
   moduleId: module.id,
@@ -22,12 +22,30 @@ import {UIChart} from "primeng/components/chart/chart";
 })
 
 export class MemberDetailComponent implements OnInit {
+  @Input()
+  member: Member;
+  performanceHistory: MemberPerformanceHistory[];
+  careerHistory: MemberCareer[];
+  memberWeiboData: MemberWeiboData;
+  weiboDataHistory: MemberWeiboData[];
+  lineChartData: any;
+  chartOptions: any;
+
+  @ViewChild
+  ('chart2')chart: UIChart;
+
+  days: SelectItem[] = [{label: '选择天数', value: null},
+    {label: '最近7天', value: 7},
+    {label: '最近15天', value: 15},
+    {label: '最近30天', value: 30}];
+  selectedDayRange: string;
+
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => this.memberService.getMember(+params['id']))
       .subscribe(member => {
         this.member = member;
-        this.setTtile(member.name + '|' + this.formatTeam(member.team))
+        this.setTtile(member.name + '|' + this.formatTeam(member.team));
       });
     this.route.params
       .switchMap((params: Params) => this.memberService.getWeiboData(+params['id']))
@@ -35,11 +53,11 @@ export class MemberDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) =>
       this.memberPerformanceService.getMemberPerformanceHistory(+params['id']))
-      .subscribe(data => {this.performanceHistory = data;});
+      .subscribe(data => {this.performanceHistory = data; });
     this.route.params
       .switchMap((params: Params) =>
         this.memberPerformanceService.getMemberCareerHistory(+params['id']))
-      .subscribe(data => {this.careerHistory = data;});
+      .subscribe(data => {this.careerHistory = data; });
     this.getWeiboHistoryData();
   }
 
@@ -56,7 +74,7 @@ export class MemberDetailComponent implements OnInit {
     this.titleService.setTitle(newTitle);
   }
 
-  formatDate(date2: number) :Date {
+  formatDate(date2: number): Date {
     return MemberUtil.formatDate(date2);
   }
 
@@ -64,21 +82,21 @@ export class MemberDetailComponent implements OnInit {
     return MemberUtil.formatDesc(desc);
   }
 
-  formatTeam(teamId: number): string{
+  formatTeam(teamId: number): string {
     return MemberUtil.formatTeam(teamId);
   }
 
   dropDownOnChange(e) {
-    let value: number = e.value;
-    if(value) {
+    const value: number = e.value;
+    if (value) {
       this.getWeiboHistoryData(value);
       this.chart.refresh();
-      //this.chart.refresh();
+      // this.chart.refresh();
     }
   }
 
 
-  getWeiboHistoryData(days: number = 7) {
+  getWeiboHistoryData(days = 7) {
     this.route.params
       .switchMap((params: Params) =>
         this.memberService.getWeiboHistory(+params['id'], days))
@@ -86,16 +104,16 @@ export class MemberDetailComponent implements OnInit {
         this.weiboDataHistory = data;
         this.formatWeiboHistoryToLineChart();
 
-        //console.log(this.chart.data);
+        // console.log(this.chart.data);
       });
   }
 
 
 
   private formatWeiboHistoryToLineChart() {
-    let labels = [];
-    let data = []
-    let datasets = [];
+    const labels = [];
+    const data = [];
+    const datasets = [];
 
     this.weiboDataHistory.forEach((item, index) => {
       labels.push((item.updateTime));
@@ -122,7 +140,7 @@ export class MemberDetailComponent implements OnInit {
       legend: {
         display: false
       },
-      elements:{
+      elements: {
         line: {
           stepped: false
         }
@@ -134,25 +152,6 @@ export class MemberDetailComponent implements OnInit {
           }
         }]
       }
-    }
+    };
   }
-
-
-  @Input()
-  member: Member;
-  performanceHistory: MemberPerformanceHistory[];
-  careerHistory: MemberCareer[];
-  memberWeiboData: MemberWeiboData;
-  weiboDataHistory: MemberWeiboData[];
-  lineChartData: any;
-  chartOptions: any;
-
-  @ViewChild
-  ('chart2')chart: UIChart;
-
-  days: SelectItem[] = [{label: '选择天数', value: null},
-    {label: '最近7天', value: 7},
-    {label: '最近15天', value: 15},
-    {label: '最近30天', value: 30}];
-  selectedDayRange: string;
 }

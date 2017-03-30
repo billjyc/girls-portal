@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Performance} from "../../model/performance";
-import {PerformanceService} from "../../service/performance.service";
-import {Title} from "@angular/platform-browser";
-import {MemberUtil} from "../../utils/MemberUtil";
-import {Cookie} from "ng2-cookies/ng2-cookies";
-import {IncomingPerformance} from "../../model/incoming-performace";
+import {Performance} from '../../model/performance';
+import {PerformanceService} from '../../service/performance.service';
+import {Title} from '@angular/platform-browser';
+import {MemberUtil} from '../../utils/MemberUtil';
+import {Cookie} from 'ng2-cookies/ng2-cookies';
+import {IncomingPerformance} from '../../model/incoming-performace';
 
 @Component({
   moduleId: module.id,
@@ -13,6 +13,9 @@ import {IncomingPerformance} from "../../model/incoming-performace";
   styleUrls: ['./performance.component.css']
 })
 export class PerformanceComponent implements OnInit {
+
+  performances: Performance[];
+  incomingPerformances: IncomingPerformance[];
 
   constructor(private performanceService: PerformanceService,
               private titleService: Title) {
@@ -29,16 +32,13 @@ export class PerformanceComponent implements OnInit {
     return MemberUtil.formatTeam(teamId);
   }
 
-  performances: Performance[];
-  incomingPerformances: IncomingPerformance[];
-
   getAllPerformances() {
     this.performanceService.getAllPerformances()
-      .then(data => {this.performances = data;})
+      .then(data => {this.performances = data; });
   }
 
   getAllIncomingPerformances() {
     this.performanceService.getAllIncomingPerformances()
-      .then(data => {this.incomingPerformances = data;});
+      .then(data => {this.incomingPerformances = data; });
   }
 }

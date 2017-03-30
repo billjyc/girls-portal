@@ -1,10 +1,10 @@
-import {Routes, RouterModule} from "@angular/router";
-import {MembersComponent} from "../component/member.component";
-import {NgModule} from "@angular/core";
-import {PendingMemberComponent} from "../component/pendingmember.component";
-import {MemberDetailComponent} from "../component/member-detail.component";
-import {PerformanceComponent} from "../component/performance/performance.component";
-import {StandingComponent} from "../component/standing/standing.component";
+import {Routes, RouterModule} from '@angular/router';
+import {MembersComponent} from '../component/member.component';
+import {NgModule} from '@angular/core';
+import {PendingMemberComponent} from '../component/pendingmember.component';
+import {MemberDetailComponent} from '../component/member-detail.component';
+import {PerformanceComponent} from '../component/performance/performance.component';
+import {StandingComponent} from '../component/standing/standing.component';
 /**
  * Created by billjyc on 2017/2/1.
  */
