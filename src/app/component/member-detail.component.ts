@@ -37,7 +37,9 @@ export class MemberDetailComponent implements OnInit {
   days: SelectItem[] = [{label: '选择天数', value: null},
     {label: '最近7天', value: 7},
     {label: '最近15天', value: 15},
-    {label: '最近30天', value: 30}];
+    {label: '最近30天', value: 30},
+    {label: '最近三个月', value: 90},
+    {label: '最近半年', value: 180}];
   selectedDayRange: string;
 
   ngOnInit(): void {
@@ -90,20 +92,22 @@ export class MemberDetailComponent implements OnInit {
     const value: number = e.value;
     if (value) {
       this.getWeiboHistoryData(value);
-      this.chart.refresh();
+      console.log('update the chart');
+      // this.chart.reinit();
       // this.chart.refresh();
     }
   }
 
 
-  getWeiboHistoryData(days = 7) {
+  getWeiboHistoryData(days = 30) {
     this.route.params
       .switchMap((params: Params) =>
         this.memberService.getWeiboHistory(+params['id'], days))
       .subscribe(data => {
         this.weiboDataHistory = data;
         this.formatWeiboHistoryToLineChart();
-
+        this.chart.reinit();
+        this.chart.refresh();
         // console.log(this.chart.data);
       });
   }
