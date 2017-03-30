@@ -93,6 +93,10 @@ export class MemberDetailComponent implements OnInit {
     if (value) {
       this.getWeiboHistoryData(value);
       console.log('update the chart');
+
+      setTimeout(() => {
+        this.chart.reinit();
+      }, 100);
       // this.chart.reinit();
       // this.chart.refresh();
     }
@@ -106,8 +110,8 @@ export class MemberDetailComponent implements OnInit {
       .subscribe(data => {
         this.weiboDataHistory = data;
         this.formatWeiboHistoryToLineChart();
-        this.chart.reinit();
-        this.chart.refresh();
+        // this.chart.reinit();
+        // this.chart.refresh();
         // console.log(this.chart.data);
       });
   }
